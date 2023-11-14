@@ -93,6 +93,7 @@ private:
     QRadioButton *fileFormatIntanButton;
     QRadioButton *fileFormatNeuroScopeButton;
     QRadioButton *fileFormatOpenEphysButton;
+    QRadioButton *fileFormatNixButton;
     QDialogButtonBox *buttonBox;
 
     QLabel *downsampleLabel;

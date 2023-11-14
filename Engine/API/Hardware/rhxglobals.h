@@ -156,7 +156,8 @@ enum SignalType {
 enum FileFormat {
     FileFormatIntan,
     FileFormatFilePerSignalType,
-    FileFormatFilePerChannel
+    FileFormatFilePerChannel,
+    FileFormatNix
 };
 
 enum BoardMode {

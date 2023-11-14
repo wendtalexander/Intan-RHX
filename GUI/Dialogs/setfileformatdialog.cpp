@@ -43,14 +43,18 @@ SetFileFormatDialog::SetFileFormatDialog(SystemState *state_, QWidget *parent) :
     fileFormatIntanButton = new QRadioButton(tr("Traditional Intan File Format"), this);
     fileFormatNeuroScopeButton = new QRadioButton(tr("\"One File Per Signal Type\" Format"), this);
     fileFormatOpenEphysButton = new QRadioButton(tr("\"One File Per Channel\" Format"), this);
+    fileFormatNixButton = new QRadioButton(tr("\" One File to Rule them all\" Format"), this);
 
     buttonGroup = new QButtonGroup(this);
     buttonGroup->addButton(fileFormatIntanButton);
     buttonGroup->addButton(fileFormatNeuroScopeButton);
     buttonGroup->addButton(fileFormatOpenEphysButton);
+    buttonGroup->addButton(fileFormatNixButton);
+
     buttonGroup->setId(fileFormatIntanButton, (int) FileFormatIntan);
     buttonGroup->setId(fileFormatNeuroScopeButton, (int) FileFormatFilePerSignalType);
     buttonGroup->setId(fileFormatOpenEphysButton, (int) FileFormatFilePerChannel);
+    buttonGroup->setId(fileFormatNixButton, (int) FileFormatNix);
 
     recordTimeSpinBox = new QSpinBox(this);
     state->newSaveFilePeriodMinutes->setupSpinBox(recordTimeSpinBox);
@@ -113,6 +117,11 @@ SetFileFormatDialog::SetFileFormatDialog(SystemState *state_, QWidget *parent) :
     QLabel *traditionalFormatWarning = new QLabel(tr("<b>Note:</b> This file format does not support saving lowpass, highpass, or "
                                                      " spike data."), this);
 
+    QLabel *NixFormatDescripton = new QLabel(tr("The NIX data model allows to store fully annotated scientific dataset, i.e. "
+                                                "the data together with its metadata within the same container. Our aim is to achieve "
+                                                "standardization by providing a common/generic data "
+                                                "structure for a multitude of data types."), this);
+
     QLabel *oneFilePerSignalTypeDescription;
     if (state->getControllerTypeEnum() == ControllerStimRecord) {
         oneFilePerSignalTypeDescription = new QLabel(tr("This option creates a subdirectory and saves raw data files for each "
@@ -135,11 +144,16 @@ SetFileFormatDialog::SetFileFormatDialog(SystemState *state_, QWidget *parent) :
                                    "file containing a timestamp\nvector, and an info.") + fileSuffix + tr(" file containing "
                                    "records of sampling rate, amplifier\nbandwidth, channel names, etc."), this);
 
+
     QVBoxLayout *traditionalBoxLayout = new QVBoxLayout;
     traditionalBoxLayout->addWidget(fileFormatIntanButton);
     traditionalBoxLayout->addWidget(traditionalFormatDescription);
     traditionalBoxLayout->addWidget(traditionalFormatWarning);
     traditionalBoxLayout->addLayout(newFileTimeLayout);
+
+    QVBoxLayout *nixBoxLayout = new QVBoxLayout;
+    nixBoxLayout->addWidget(fileFormatNixButton);
+    nixBoxLayout->addWidget(NixFormatDescripton);
 
     QVBoxLayout *oneFilePerSignalTypeBoxLayout = new QVBoxLayout;
     oneFilePerSignalTypeBoxLayout->addWidget(fileFormatNeuroScopeButton);
@@ -155,6 +169,8 @@ SetFileFormatDialog::SetFileFormatDialog(SystemState *state_, QWidget *parent) :
 
     QGroupBox *traditionalBox = new QGroupBox();
     traditionalBox->setLayout(traditionalBoxLayout);
+    QGroupBox *nixBox = new QGroupBox();
+    nixBox->setLayout(nixBoxLayout);
     QGroupBox *oneFilePerSignalTypeBox = new QGroupBox();
     oneFilePerSignalTypeBox->setLayout(oneFilePerSignalTypeBoxLayout);
     QGroupBox *oneFilePerChannelBox = new QGroupBox();
@@ -185,6 +201,7 @@ SetFileFormatDialog::SetFileFormatDialog(SystemState *state_, QWidget *parent) :
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(traditionalBox);
+    mainLayout->addWidget(nixBox);
     mainLayout->addWidget(oneFilePerSignalTypeBox);
     mainLayout->addWidget(oneFilePerChannelBox);
     mainLayout->addWidget(createNewDirectoryCheckBox);
