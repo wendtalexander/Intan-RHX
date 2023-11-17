@@ -117,10 +117,10 @@ SetFileFormatDialog::SetFileFormatDialog(SystemState *state_, QWidget *parent) :
     QLabel *traditionalFormatWarning = new QLabel(tr("<b>Note:</b> This file format does not support saving lowpass, highpass, or "
                                                      " spike data."), this);
 
-    QLabel *NixFormatDescripton = new QLabel(tr("The NIX data model allows to store fully annotated scientific dataset, i.e. "
-                                                "the data together with its metadata within the same container. Our aim is to achieve "
+    QLabel *NixFormatDescripton = new QLabel(tr("The NIX data model allows to store fully annotated scientific dataset, i.e.\n "
+                                                "the data together with its metadata within the same container. Our aim is to achieve\n "
                                                 "standardization by providing a common/generic data "
-                                                "structure for a multitude of data types."), this);
+                                                "structure\n for a multitude of data types."), this);
 
     QLabel *oneFilePerSignalTypeDescription;
     if (state->getControllerTypeEnum() == ControllerStimRecord) {
