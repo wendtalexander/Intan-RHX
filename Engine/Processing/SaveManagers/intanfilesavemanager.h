@@ -34,7 +34,6 @@
 #include "waveformfifo.h"
 #include "systemstate.h"
 #include "savemanager.h"
-
 // Intan save file format (*.rhd, *.rhs)
 class IntanFileSaveManager : public SaveManager
 {

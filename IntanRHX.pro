@@ -272,6 +272,7 @@ win32: {
 LIBS += -L$$PWD/libraries/Windows/ -lOpenCL # OpenCL library
 LIBS += -L$$PWD/libraries/Windows/ -lokFrontPanel # Opal Kelly Front Panel library
 LIBS += -L$$PWD/libraries/Windows/ -ldelayimp # Microsoft's Delay Import library
+LIBS += -L$$PWD/libraries/Windows/ -lnix # nix file format
 QMAKE_LFLAGS += /DELAYLOAD:okFrontPanel.dll # Use delayimp to only load okFrontPanel.dll when necessary,
                                             # so we can give an error message when okFrontPanel.dll is missing
 }
